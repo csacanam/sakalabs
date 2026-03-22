@@ -12,8 +12,8 @@ const t = {
     hashproofDesc: 'Plataforma de verificacion y certificacion de documentos en blockchain. Prueba de existencia, integridad y autenticidad para archivos digitales.',
     gloritaDesc: 'Plataforma de administracion residencial potenciada con IA. Cobro de cartera por WhatsApp, actas de reunion automaticas y comunicaciones inteligentes para administradores de conjuntos residenciales en Colombia.',
     about: 'Sobre nosotros',
-    aboutP1: 'Saka Labs nace de la curiosidad por explorar como la Inteligencia Artificial y el Blockchain pueden transformar industrias que llevan decadas haciendo las cosas de la misma manera. No somos una agencia ni una consultora — somos un laboratorio que construye, prueba y lanza productos propios.',
-    aboutP2: 'Cada producto que creamos resuelve un problema especifico y real. Desde la verificacion de documentos en blockchain hasta la administracion de conjuntos residenciales, buscamos oportunidades donde la tecnologia puede hacer una diferencia tangible.',
+    aboutP1: 'Saka Labs nace de la curiosidad por explorar como la Inteligencia Artificial y el Blockchain pueden transformar industrias que llevan decadas haciendo las cosas de la misma manera.',
+    aboutP2: 'No somos una agencia ni una consultora. Somos un laboratorio que construye y lanza sus propios productos.',
   },
   en: {
     subtitle: 'Experimental lab',
@@ -24,8 +24,8 @@ const t = {
     hashproofDesc: 'Blockchain-based document verification and certification platform. Proof of existence, integrity, and authenticity for digital files.',
     gloritaDesc: 'AI-powered residential management platform. WhatsApp debt collection, automated meeting minutes, and smart communications for residential complex administrators in Colombia.',
     about: 'About us',
-    aboutP1: 'Saka Labs was born from the curiosity to explore how Artificial Intelligence and Blockchain can transform industries that have been doing things the same way for decades. We are not an agency or a consultancy — we are a lab that builds, tests, and launches our own products.',
-    aboutP2: 'Every product we create solves a specific, real problem. From blockchain document verification to residential complex management, we look for opportunities where technology can make a tangible difference.',
+    aboutP1: 'Saka Labs was born from the curiosity to explore how Artificial Intelligence and Blockchain can transform industries that have been doing things the same way for decades.',
+    aboutP2: 'We are not an agency or a consultancy. We are a lab that builds and launches our own products.',
   },
 }
 
