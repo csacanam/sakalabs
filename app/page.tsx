@@ -54,8 +54,8 @@ export default function Home() {
             >
               {lang === 'es' ? 'EN' : 'ES'}
             </button>
-            <a href="mailto:hello@sakalabs.io" className="text-sm text-white/60 hover:text-white transition-colors hidden sm:block">
-              hello@sakalabs.io
+            <a href="mailto:hi@sakalabs.io" className="text-sm text-white/60 hover:text-white transition-colors hidden sm:block">
+              hi@sakalabs.io
             </a>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function Home() {
             className="group rounded-xl border border-white/10 bg-white/5 p-6 hover:border-white/20 hover:bg-white/10 transition-all"
           >
             <div className="mb-4">
-              <h3 className="font-semibold text-lg">Hashproof</h3>
+              <h3 className="font-semibold text-lg">HashProof</h3>
               <div className="flex gap-2 mt-1">
                 <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Blockchain</span>
                 <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Global</span>
@@ -136,7 +136,7 @@ export default function Home() {
       <footer className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <img src="/logo-sakalabs.png" alt="Saka Labs" className="h-6" />
-          <p className="text-sm text-white/30">Colombia</p>
+          <a href="mailto:hi@sakalabs.io" className="text-sm text-white/30 hover:text-white/50 transition-colors">hi@sakalabs.io</a>
         </div>
       </footer>
     </div>
