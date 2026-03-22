@@ -46,10 +46,7 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-5xl flex items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-2">
-            <img src="/icon-sakalabs.png" alt="Saka Labs" className="h-7 w-7" />
-            <span className="text-xl font-bold tracking-tight">Saka Labs</span>
-          </div>
+          <img src="/logo-sakalabs.png" alt="Saka Labs" className="h-8" />
           <div className="flex items-center gap-4">
             <button
               onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
@@ -138,10 +135,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <img src="/icon-sakalabs.png" alt="Saka Labs" className="h-5 w-5" />
-            <span className="text-sm text-white/40">Saka Labs</span>
-          </div>
+          <img src="/logo-sakalabs.png" alt="Saka Labs" className="h-6" />
           <p className="text-sm text-white/30">Colombia</p>
         </div>
       </footer>
