@@ -89,7 +89,10 @@ export default function Home() {
           >
             <div className="mb-4">
               <h3 className="font-semibold text-lg">Hashproof</h3>
-              <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Blockchain</span>
+              <div className="flex gap-2 mt-1">
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Blockchain</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Global</span>
+              </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed">{txt.hashproofDesc}</p>
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
@@ -105,7 +108,10 @@ export default function Home() {
           >
             <div className="mb-4">
               <h3 className="font-semibold text-lg">Glorita</h3>
-              <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI</span>
+              <div className="flex gap-2 mt-1">
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Colombia</span>
+              </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed">{txt.gloritaDesc}</p>
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
