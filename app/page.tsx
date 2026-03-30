@@ -10,7 +10,8 @@ const t = {
     heroDesc: 'Saka Labs es un laboratorio donde experimentamos con tecnologias de Inteligencia Artificial y Blockchain para crear productos que resuelven problemas reales en industrias tradicionales.',
     products: 'Productos',
     hashproofDesc: 'Plataforma de verificacion y certificacion de documentos en blockchain. Prueba de existencia, integridad y autenticidad para archivos digitales.',
-    gloritaDesc: 'Plataforma de administracion residencial potenciada con IA. Cobro de cartera por WhatsApp, actas de reunion automaticas y comunicaciones inteligentes para administradores de conjuntos residenciales en Colombia.',
+    // gloritaDesc: 'Plataforma de administracion residencial potenciada con IA. Cobro de cartera por WhatsApp, actas de reunion automaticas y comunicaciones inteligentes para administradores de conjuntos residenciales en Colombia.',
+    loteroDesc: 'Tragamonedas verificable on-chain en Base. Apuesta 1 USDC, gana hasta 30 USDC. Sin gas. Aleatoridad verificable con Chainlink VRF. Tambien disponible como agente via x402.',
     about: 'Sobre nosotros',
     aboutP1: 'Saka Labs nace de la curiosidad por explorar como la Inteligencia Artificial y el Blockchain pueden transformar industrias que llevan decadas haciendo las cosas de la misma manera.',
     aboutP2: 'No somos una agencia ni una consultora. Somos un laboratorio que construye y lanza sus propios productos.',
@@ -22,7 +23,8 @@ const t = {
     heroDesc: 'Saka Labs is a laboratory where we experiment with AI and Blockchain technologies to create products that solve real problems in traditional industries.',
     products: 'Products',
     hashproofDesc: 'Blockchain-based document verification and certification platform. Proof of existence, integrity, and authenticity for digital files.',
-    gloritaDesc: 'AI-powered residential management platform. WhatsApp debt collection, automated meeting minutes, and smart communications for residential complex administrators in Colombia.',
+    // gloritaDesc: 'AI-powered residential management platform. WhatsApp debt collection, automated meeting minutes, and smart communications for residential complex administrators in Colombia.',
+    loteroDesc: 'Provably fair on-chain slot machine on Base. Bet 1 USDC, win up to 30 USDC. No gas needed. Verifiable randomness with Chainlink VRF. Also available as an agent via x402.',
     about: 'About us',
     aboutP1: 'Saka Labs was born from the curiosity to explore how Artificial Intelligence and Blockchain can transform industries that have been doing things the same way for decades.',
     aboutP2: 'We are not an agency or a consultancy. We are a lab that builds and launches our own products.',
@@ -101,21 +103,21 @@ export default function Home() {
           </a>
 
           <a
-            href="https://glorita.co"
+            href="https://lotero.xyz"
             target="_blank"
             rel="noopener"
             className="group rounded-xl border border-white/10 bg-white/5 p-6 hover:border-white/20 hover:bg-white/10 transition-all"
           >
             <div className="mb-4">
-              <h3 className="font-semibold text-lg">Glorita</h3>
+              <h3 className="font-semibold text-lg">Lotero</h3>
               <div className="flex gap-2 mt-1">
-                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI</span>
-                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Colombia</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Blockchain</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI Agents</span>
               </div>
             </div>
-            <p className="text-sm text-white/60 leading-relaxed">{txt.gloritaDesc}</p>
+            <p className="text-sm text-white/60 leading-relaxed">{txt.loteroDesc}</p>
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
-              glorita.co →
+              lotero.xyz →
             </p>
           </a>
         </div>
