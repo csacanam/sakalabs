@@ -107,8 +107,10 @@ export default function Home() {
             <div className="mb-4">
               <h3 className="font-semibold text-lg">HashProof</h3>
               <div className="flex gap-2 mt-1">
-                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Blockchain</span>
-                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Global</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Base</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Celo</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI Agents</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">API</span>
               </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed flex-1">{txt.hashproofDesc}</p>
@@ -133,8 +135,9 @@ export default function Home() {
             <div className="mb-4">
               <h3 className="font-semibold text-lg">Lotero</h3>
               <div className="flex gap-2 mt-1">
-                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Blockchain</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Base</span>
                 <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI Agents</span>
+                <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">API</span>
               </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed flex-1">{txt.loteroDesc}</p>
