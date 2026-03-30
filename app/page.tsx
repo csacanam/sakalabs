@@ -87,7 +87,7 @@ export default function Home() {
             href="https://hashproof.dev"
             target="_blank"
             rel="noopener"
-            className="group rounded-xl border border-white/10 bg-white/5 p-6 hover:border-white/20 hover:bg-white/10 transition-all"
+            className="group flex flex-col rounded-xl border border-white/10 bg-white/5 p-6 hover:border-white/20 hover:bg-white/10 transition-all"
           >
             <div className="mb-4">
               <h3 className="font-semibold text-lg">HashProof</h3>
@@ -96,7 +96,7 @@ export default function Home() {
                 <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">Global</span>
               </div>
             </div>
-            <p className="text-sm text-white/60 leading-relaxed">{txt.hashproofDesc}</p>
+            <p className="text-sm text-white/60 leading-relaxed flex-1">{txt.hashproofDesc}</p>
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
               hashproof.dev →
             </p>
@@ -106,7 +106,7 @@ export default function Home() {
             href="https://lotero.xyz"
             target="_blank"
             rel="noopener"
-            className="group rounded-xl border border-white/10 bg-white/5 p-6 hover:border-white/20 hover:bg-white/10 transition-all"
+            className="group flex flex-col rounded-xl border border-white/10 bg-white/5 p-6 hover:border-white/20 hover:bg-white/10 transition-all"
           >
             <div className="mb-4">
               <h3 className="font-semibold text-lg">Lotero</h3>
@@ -115,7 +115,7 @@ export default function Home() {
                 <span className="text-xs text-white/40 bg-white/10 px-2 py-0.5 rounded-full">AI Agents</span>
               </div>
             </div>
-            <p className="text-sm text-white/60 leading-relaxed">{txt.loteroDesc}</p>
+            <p className="text-sm text-white/60 leading-relaxed flex-1">{txt.loteroDesc}</p>
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
               lotero.xyz →
             </p>
