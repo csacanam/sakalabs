@@ -12,6 +12,7 @@ const t = {
     hashproofDesc: 'Plataforma de verificacion y certificacion de documentos en blockchain. Prueba de existencia, integridad y autenticidad para archivos digitales.',
     // gloritaDesc: 'Plataforma de administracion residencial potenciada con IA. Cobro de cartera por WhatsApp, actas de reunion automaticas y comunicaciones inteligentes para administradores de conjuntos residenciales en Colombia.',
     loteroDesc: 'Tragamonedas verificable on-chain en Base. Apuesta 1 USDC, gana hasta 30 USDC. Sin gas. Aleatoridad verificable con Chainlink VRF. Tambien disponible como agente via x402.',
+    revenueLabel: 'Revenue',
     about: 'Sobre nosotros',
     aboutP1: 'Saka Labs nace de la curiosidad por explorar como la Inteligencia Artificial y el Blockchain pueden transformar industrias que llevan decadas haciendo las cosas de la misma manera.',
     aboutP2: 'No somos una agencia ni una consultora. Somos un laboratorio que construye y lanza sus propios productos.',
@@ -25,6 +26,7 @@ const t = {
     hashproofDesc: 'Blockchain-based document verification and certification platform. Proof of existence, integrity, and authenticity for digital files.',
     // gloritaDesc: 'AI-powered residential management platform. WhatsApp debt collection, automated meeting minutes, and smart communications for residential complex administrators in Colombia.',
     loteroDesc: 'Provably fair on-chain slot machine on Base. Bet 1 USDC, win up to 30 USDC. No gas needed. Verifiable randomness with Chainlink VRF. Also available as an agent via x402.',
+    revenueLabel: 'Revenue',
     about: 'About us',
     aboutP1: 'Saka Labs was born from the curiosity to explore how Artificial Intelligence and Blockchain can transform industries that have been doing things the same way for decades.',
     aboutP2: 'We are not an agency or a consultancy. We are a lab that builds and launches our own products.',
@@ -35,10 +37,23 @@ type Lang = 'es' | 'en'
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>('en')
+  const [hashproofCerts, setHashproofCerts] = useState<number | null>(null)
+  const [loteroFees, setLoteroFees] = useState<number | null>(null)
 
   useEffect(() => {
     const browserLang = navigator.language.toLowerCase()
     setLang(browserLang.startsWith('es') ? 'es' : 'en')
+  }, [])
+
+  useEffect(() => {
+    fetch('https://api.hashproof.dev/stats')
+      .then(r => r.json())
+      .then(d => setHashproofCerts(d.total_credentials))
+      .catch(() => {})
+    fetch('https://api.lotero.xyz/stats')
+      .then(r => r.json())
+      .then(d => setLoteroFees(d.devFeesUSDC))
+      .catch(() => {})
   }, [])
 
   const txt = t[lang]
@@ -97,6 +112,13 @@ export default function Home() {
               </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed flex-1">{txt.hashproofDesc}</p>
+            {hashproofCerts !== null && (
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
+                <p className="text-2xl font-bold text-green-400">${(hashproofCerts * 0.1).toFixed(2)}</p>
+                <p className="text-xs text-white/40 mt-1">{hashproofCerts} certs × $0.10</p>
+              </div>
+            )}
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
               hashproof.dev →
             </p>
@@ -116,6 +138,13 @@ export default function Home() {
               </div>
             </div>
             <p className="text-sm text-white/60 leading-relaxed flex-1">{txt.loteroDesc}</p>
+            {loteroFees !== null && (
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
+                <p className="text-2xl font-bold text-green-400">${loteroFees.toFixed(2)}</p>
+                <p className="text-xs text-white/40 mt-1">dev fees (USDC)</p>
+              </div>
+            )}
             <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
               lotero.xyz →
             </p>
