@@ -52,7 +52,7 @@ export default function Home() {
       .catch(() => {})
     fetch('https://api.lotero.xyz/stats')
       .then(r => r.json())
-      .then(d => setLoteroFees(d.devFeesUSDC))
+      .then(d => setLoteroFees(d.revenue.devFeesUSDC))
       .catch(() => {})
   }, [])
 
