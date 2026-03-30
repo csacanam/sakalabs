@@ -118,10 +118,9 @@ export default function Home() {
               <div className="mt-4 pt-4 border-t border-white/10">
                 <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
                 <p className="text-2xl font-bold text-green-400">${(hashproofCerts * 0.1).toFixed(2)}</p>
-                <p className="text-xs text-white/40 mt-1">{hashproofCerts} certs × $0.10</p>
               </div>
             )}
-            <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
+            <p className="mt-4 text-sm text-blue-400/70 group-hover:text-blue-400 transition-colors">
               hashproof.dev →
             </p>
           </a>
@@ -145,10 +144,9 @@ export default function Home() {
               <div className="mt-4 pt-4 border-t border-white/10">
                 <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
                 <p className="text-2xl font-bold text-green-400">${loteroFees.toFixed(2)}</p>
-                <p className="text-xs text-white/40 mt-1">dev fees (USDC)</p>
               </div>
             )}
-            <p className="mt-4 text-sm text-white/30 group-hover:text-white/50 transition-colors">
+            <p className="mt-4 text-sm text-blue-400/70 group-hover:text-blue-400 transition-colors">
               lotero.xyz →
             </p>
           </a>
