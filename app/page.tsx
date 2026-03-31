@@ -70,7 +70,7 @@ export default function Home() {
       name: 'Voulti',
       href: 'https://voulti.com',
       domain: 'voulti.com',
-      tags: ['Blockchain', 'Payments', 'Multi-chain'],
+      tags: ['Blockchain', 'Payments', 'API'],
       desc: txt.voultiDesc,
       revenue: revenues.voulti,
     },
