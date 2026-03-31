@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/csacanam/Dev/hashproof/backend/src/services/**)",
+      "Read(//Users/csacanam/Dev/hashproof/backend/src/**)",
+      "Read(//Users/csacanam/Dev/hashproof/**)",
+      "Read(//Users/csacanam/Dev/lotero/**)",
+      "Read(//Users/csacanam/Dev/lotero/packages/**)"
+    ]
+  }
+}
