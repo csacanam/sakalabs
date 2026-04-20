@@ -13,6 +13,7 @@ const t = {
     hashproofDesc: 'API de credenciales verificables en blockchain. Emite certificados con una sola llamada. $0.10 por credencial, sin suscripciones. Para desarrolladores, plataformas y agentes de IA.',
     loteroDesc: 'Casino verificablemente justo para agentes de IA. Tragamonedas on-chain en Base con Chainlink VRF. 1 USDC por giro, gana hasta 30 USDC. Sin gas via x402.',
     tutelaenlineaDesc: 'Plataforma de asesoría legal con IA para Colombia. Redacta acciones de tutela y derechos de petición en minutos. Asesoría gratis por chat y documento listo para firmar por $10.000 COP.',
+    freakingGrammarDesc: 'Juego diario de agilidad gramatical con pot en stablecoins. Toca la palabra correcta más rápido que los demás. Un ganador por juego se lleva el 100% del pot. En inglés y español, sobre Celo. Farcaster mini-app + MiniPay.',
     revenueLabel: 'Revenue',
     about: 'Sobre nosotros',
     aboutP1: 'Estamos en la era dorada para builders. Las herramientas nunca fueron tan poderosas ni tan accesibles. Nosotros construimos porque no sabemos hacer otra cosa — es lo que nos mueve.',
@@ -28,6 +29,7 @@ const t = {
     hashproofDesc: 'Verifiable credentials API on blockchain. Issue certificates with a single call. $0.10 per credential, no subscriptions. For developers, platforms, and AI agents.',
     loteroDesc: 'Provably fair casino for AI agents. On-chain slot machine on Base with Chainlink VRF. 1 USDC per spin, win up to 30 USDC. Gasless via x402.',
     tutelaenlineaDesc: 'AI-powered legal platform for Colombia. Drafts constitutional tutela actions and petition rights in minutes. Free chat advice; ready-to-sign document for $10,000 COP (~$2.50 USD).',
+    freakingGrammarDesc: 'Daily grammar agility game with a stablecoin pot. Tap the right word fastest. One winner per game takes 100% of the pot. English + Spanish, on Celo. Farcaster mini-app + MiniPay.',
     revenueLabel: 'Revenue',
     about: 'About us',
     aboutP1: 'We\'re living in the golden age for builders. Tools have never been this powerful or this accessible. We build because we don\'t know how to do anything else — it\'s what drives us.',
@@ -67,6 +69,11 @@ export default function Home() {
       .then(r => r.json())
       .then(d => setRevenues(prev => ({ ...prev, tutelaenlinea: parseFloat(d.revenue?.totalUsd || '0') })))
       .catch(() => {})
+
+    fetch('https://freaking-grammar.vercel.app/api/stats')
+      .then(r => r.json())
+      .then(d => setRevenues(prev => ({ ...prev, freakingGrammar: d.revenueUSD || 0 })))
+      .catch(() => {})
   }, [])
 
   const txt = t[lang]
@@ -104,6 +111,14 @@ export default function Home() {
       tags: ['AI', 'Legal', 'Colombia'],
       desc: txt.tutelaenlineaDesc,
       revenue: revenues.tutelaenlinea,
+    },
+    {
+      name: 'Freaking Grammar',
+      href: 'https://freaking-grammar.vercel.app',
+      domain: 'freaking-grammar.vercel.app',
+      tags: ['Blockchain', 'Gaming', 'Mini App'],
+      desc: txt.freakingGrammarDesc,
+      revenue: revenues.freakingGrammar,
     },
   ].sort((a, b) => (b.revenue || 0) - (a.revenue || 0))
 
