@@ -13,8 +13,9 @@ const t = {
     hashproofDesc: 'API de credenciales verificables en blockchain. Emite certificados con una sola llamada. $0.10 por credencial, sin suscripciones. Para desarrolladores, plataformas y agentes de IA.',
     loteroDesc: 'Casino verificablemente justo para agentes de IA. Tragamonedas on-chain en Base con Chainlink VRF. 1 USDC por giro, gana hasta 30 USDC. Sin gas via x402.',
     tutelaenlineaDesc: 'Plataforma de asesoría legal con IA para Colombia. Redacta acciones de tutela y derechos de petición en minutos. Asesoría gratis por chat y documento listo para firmar por $10.000 COP.',
-    freakingGrammarDesc: 'Juego diario de agilidad gramatical con pot en stablecoins. Toca la palabra correcta más rápido que los demás. Un ganador por juego se lleva el 100% del pot. En inglés y español, sobre Celo. Farcaster mini-app + MiniPay.',
+    nerdosDesc: 'Plataforma de juegos diarios con premio on-chain. Grammar (EN/ES) y Math: decide rápido y bien para llevarte el premio en USDT del día. En Celo. Farcaster mini-app + MiniPay.',
     revenueLabel: 'Revenue',
+    grantsLabel: 'Grants',
     about: 'Sobre nosotros',
     aboutP1: 'Estamos en la era dorada para builders. Las herramientas nunca fueron tan poderosas ni tan accesibles. Nosotros construimos porque no sabemos hacer otra cosa — es lo que nos mueve.',
     aboutP2: 'Cada producto es un experimento: una tecnología nueva, un caso de uso diferente, un problema que nos intriga. Si algo de lo que hacemos te inspira a construir, entonces estamos haciendo bien nuestro trabajo.',
@@ -29,8 +30,9 @@ const t = {
     hashproofDesc: 'Verifiable credentials API on blockchain. Issue certificates with a single call. $0.10 per credential, no subscriptions. For developers, platforms, and AI agents.',
     loteroDesc: 'Provably fair casino for AI agents. On-chain slot machine on Base with Chainlink VRF. 1 USDC per spin, win up to 30 USDC. Gasless via x402.',
     tutelaenlineaDesc: 'AI-powered legal platform for Colombia. Drafts constitutional tutela actions and petition rights in minutes. Free chat advice; ready-to-sign document for $10,000 COP (~$2.50 USD).',
-    freakingGrammarDesc: 'Daily grammar agility game with a stablecoin pot. Tap the right word fastest. One winner per game takes 100% of the pot. English + Spanish, on Celo. Farcaster mini-app + MiniPay.',
+    nerdosDesc: 'Daily-prize gaming platform. Grammar (EN/ES) and Math: pick fast and right to win the day\'s USDT prize. On Celo. Farcaster mini-app + MiniPay.',
     revenueLabel: 'Revenue',
+    grantsLabel: 'Grants',
     about: 'About us',
     aboutP1: 'We\'re living in the golden age for builders. Tools have never been this powerful or this accessible. We build because we don\'t know how to do anything else — it\'s what drives us.',
     aboutP2: 'Each product is an experiment: a new technology, a different use case, a problem that intrigues us. If anything we do inspires you to build, then we\'re doing our job right.',
@@ -42,6 +44,10 @@ type Lang = 'es' | 'en'
 export default function Home() {
   const [lang, setLang] = useState<Lang>('en')
   const [revenues, setRevenues] = useState<Record<string, number>>({})
+  // External funding (grants, hackathon prizes) tracked separately from
+  // organic revenue. Only nerdos.fun publishes this today; future
+  // products can opt in by populating their own grants[] keyed entry.
+  const [grants, setGrants] = useState<Record<string, number>>({})
 
   useEffect(() => {
     const browserLang = navigator.language.toLowerCase()
@@ -70,9 +76,15 @@ export default function Home() {
       .then(d => setRevenues(prev => ({ ...prev, tutelaenlinea: parseFloat(d.revenue?.totalUsd || '0') })))
       .catch(() => {})
 
-    fetch('https://freaking-grammar.vercel.app/api/stats')
+    // Hit nerdos.fun directly — the old freaking-grammar.vercel.app
+    // host 307s here, but the redirect lacks CORS headers and the
+    // browser blocks the cross-origin redirect on fetch().
+    fetch('https://nerdos.fun/api/stats')
       .then(r => r.json())
-      .then(d => setRevenues(prev => ({ ...prev, freakingGrammar: d.revenueUSD || 0 })))
+      .then(d => {
+        setRevenues(prev => ({ ...prev, nerdos: d.revenueUSD || 0 }))
+        setGrants(prev => ({ ...prev, nerdos: d.grantsReceivedUSD || 0 }))
+      })
       .catch(() => {})
   }, [])
 
@@ -113,16 +125,19 @@ export default function Home() {
       revenue: revenues.tutelaenlinea,
     },
     {
-      name: 'Freaking Grammar',
-      href: 'https://freaking-grammar.vercel.app',
-      domain: 'freaking-grammar.vercel.app',
+      name: 'nerdos.fun',
+      href: 'https://nerdos.fun',
+      domain: 'nerdos.fun',
       tags: ['Blockchain', 'Gaming', 'Mini App'],
-      desc: txt.freakingGrammarDesc,
-      revenue: revenues.freakingGrammar,
+      desc: txt.nerdosDesc,
+      revenue: revenues.nerdos,
+      grants: grants.nerdos,
     },
-  ].sort((a, b) => (b.revenue || 0) - (a.revenue || 0))
+  ].sort((a, b) => ((b.revenue || 0) + ((b as { grants?: number }).grants || 0)) - ((a.revenue || 0) + ((a as { grants?: number }).grants || 0)))
 
-  const totalRevenue = Object.values(revenues).reduce((sum, r) => sum + (r || 0), 0)
+  const totalRevenue =
+    Object.values(revenues).reduce((sum, r) => sum + (r || 0), 0) +
+    Object.values(grants).reduce((sum, g) => sum + (g || 0), 0)
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -187,14 +202,35 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-sm text-white/60 leading-relaxed flex-1">{product.desc}</p>
-              {product.revenue !== undefined && product.revenue > 0 && (
-                <div className="mt-4 pt-4 border-t border-white/10">
-                  <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
-                  <p className="text-2xl font-bold text-green-400">
-                    ${product.revenue < 0.01 ? product.revenue.toFixed(6) : product.revenue.toFixed(2)}
-                  </p>
-                </div>
-              )}
+              {(() => {
+                // Type-narrow because not every product carries grants;
+                // the optional field reads as `undefined` for those that
+                // don't, which keeps the conditional honest below.
+                const grantsUSD = (product as { grants?: number }).grants;
+                const hasRevenue = product.revenue !== undefined && product.revenue > 0;
+                const hasGrants = grantsUSD !== undefined && grantsUSD > 0;
+                if (!hasRevenue && !hasGrants) return null;
+                return (
+                  <div className="mt-4 pt-4 border-t border-white/10 grid grid-cols-2 gap-4">
+                    {hasRevenue && (
+                      <div>
+                        <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
+                        <p className="text-2xl font-bold text-green-400">
+                          ${product.revenue! < 0.01 ? product.revenue!.toFixed(6) : product.revenue!.toFixed(2)}
+                        </p>
+                      </div>
+                    )}
+                    {hasGrants && (
+                      <div>
+                        <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.grantsLabel}</p>
+                        <p className="text-2xl font-bold text-blue-400">
+                          ${grantsUSD!.toFixed(2)}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
               <p className="mt-4 text-sm text-blue-400/70 group-hover:text-blue-400 transition-colors">
                 {product.domain} →
               </p>
