@@ -1,6 +1,41 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+// Smoothly animates a number from the previous value to the new target
+// whenever `value` changes. Used so revenue/grants don't snap from $0 to
+// the real figure when the upstream fetch resolves.
+function AnimatedAmount({ value, decimals = 2 }: { value: number; decimals?: number }) {
+  const [displayed, setDisplayed] = useState(value)
+  const fromRef = useRef(value)
+  const startRef = useRef<number | null>(null)
+  const frameRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    fromRef.current = displayed
+    startRef.current = null
+    const duration = 900
+    const from = fromRef.current
+    const to = value
+    if (from === to) return
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3) // ease-out cubic
+
+    const step = (ts: number) => {
+      if (startRef.current === null) startRef.current = ts
+      const elapsed = ts - startRef.current
+      const t = Math.min(1, elapsed / duration)
+      setDisplayed(from + (to - from) * ease(t))
+      if (t < 1) frameRef.current = requestAnimationFrame(step)
+    }
+    frameRef.current = requestAnimationFrame(step)
+    return () => {
+      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
+  return <>${displayed.toFixed(decimals)}</>
+}
 
 const t = {
   es: {
@@ -175,7 +210,7 @@ export default function Home() {
         {totalRevenue > 0 && (
           <div className="mt-8 inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2">
             <span className="text-xs text-white/40 uppercase tracking-wide">{lang === 'es' ? 'Revenue total' : 'Total revenue'}</span>
-            <span className="text-lg font-bold text-green-400">${totalRevenue.toFixed(2)}</span>
+            <span className="text-lg font-bold text-green-400"><AnimatedAmount value={totalRevenue} /></span>
           </div>
         )}
       </section>
@@ -216,7 +251,7 @@ export default function Home() {
                       <div>
                         <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.revenueLabel}</p>
                         <p className="text-2xl font-bold text-green-400">
-                          ${product.revenue! < 0.01 ? product.revenue!.toFixed(6) : product.revenue!.toFixed(2)}
+                          <AnimatedAmount value={product.revenue!} decimals={product.revenue! < 0.01 ? 6 : 2} />
                         </p>
                       </div>
                     )}
@@ -224,7 +259,7 @@ export default function Home() {
                       <div>
                         <p className="text-xs text-white/40 uppercase tracking-widest mb-1">{txt.grantsLabel}</p>
                         <p className="text-2xl font-bold text-blue-400">
-                          ${grantsUSD!.toFixed(2)}
+                          <AnimatedAmount value={grantsUSD!} />
                         </p>
                       </div>
                     )}
