@@ -49,6 +49,7 @@ const t = {
     loteroDesc: 'Casino verificablemente justo para agentes de IA. Tragamonedas on-chain en Base con Chainlink VRF. 1 USDC por giro, gana hasta 30 USDC. Sin gas via x402.',
     tutelaenlineaDesc: 'Plataforma de asesoría legal con IA para Colombia. Redacta acciones de tutela y derechos de petición en minutos. Asesoría gratis por chat y documento listo para firmar por $10.000 COP.',
     nerdosDesc: 'Plataforma de juegos diarios con premio on-chain. Grammar (EN/ES) y Math: decide rápido y bien para llevarte el premio en USDT del día. En Celo. Farcaster mini-app + MiniPay.',
+    comprabtcDesc: 'Agente autónomo de DCA en Bitcoin sobre Celo. Creas un plan on-chain y el agente compra Bitcoin por ti en cada cuota: USDT→BTC en Uniswap, sin custodia. $0.005 + 1% por cuota. Pagos de agentes vía x402.',
     revenueLabel: 'Revenue',
     grantsLabel: 'Grants',
     about: 'Sobre nosotros',
@@ -66,6 +67,7 @@ const t = {
     loteroDesc: 'Provably fair casino for AI agents. On-chain slot machine on Base with Chainlink VRF. 1 USDC per spin, win up to 30 USDC. Gasless via x402.',
     tutelaenlineaDesc: 'AI-powered legal platform for Colombia. Drafts constitutional tutela actions and petition rights in minutes. Free chat advice; ready-to-sign document for $10,000 COP (~$2.50 USD).',
     nerdosDesc: 'Daily-prize gaming platform. Grammar (EN/ES) and Math: pick fast and right to win the day\'s USDT prize. On Celo. Farcaster mini-app + MiniPay.',
+    comprabtcDesc: 'Autonomous Bitcoin DCA agent on Celo. You create a plan on-chain and the agent buys Bitcoin for you every installment: USDT→BTC on Uniswap, non-custodial. $0.005 + 1% per installment. Agentic payments via x402.',
     revenueLabel: 'Revenue',
     grantsLabel: 'Grants',
     about: 'About us',
@@ -121,6 +123,11 @@ export default function Home() {
         setGrants(prev => ({ ...prev, nerdos: d.grantsReceivedUSD || 0 }))
       })
       .catch(() => {})
+
+    fetch('https://comprabtc-production.up.railway.app/api/stats')
+      .then(r => r.json())
+      .then(d => setRevenues(prev => ({ ...prev, comprabtc: parseFloat(d.revenue?.totalUsd || '0') })))
+      .catch(() => {})
   }, [])
 
   const txt = t[lang]
@@ -167,6 +174,14 @@ export default function Home() {
       desc: txt.nerdosDesc,
       revenue: revenues.nerdos,
       grants: grants.nerdos,
+    },
+    {
+      name: 'CompraBTC',
+      href: 'https://comprabtc.vercel.app',
+      domain: 'comprabtc.vercel.app',
+      tags: ['Blockchain', 'AI Agents', 'Bitcoin'],
+      desc: txt.comprabtcDesc,
+      revenue: revenues.comprabtc,
     },
   ].sort((a, b) => ((b.revenue || 0) + ((b as { grants?: number }).grants || 0)) - ((a.revenue || 0) + ((a as { grants?: number }).grants || 0)))
 
